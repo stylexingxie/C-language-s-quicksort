@@ -1,0 +1,54 @@
+#include "pch.h"
+#include <iostream>
+#include "stdlib.h"
+int a[101], n;//数组a，整数n
+void quicksort(int left, int right)//引入整数变量left与right
+{
+	int i, j, t, temp;//引入整数变量i、j、t、temp
+	if (left > right)//如果L>R
+	{
+		return;
+	}
+	temp = a[left];//aL赋值给temp
+	i = left;//L赋值给i
+	j = right;//R赋值给j
+	while (i != j)//如果i！=j 即L！=R
+	{
+		while (a[j] >= temp && i < j)//如果aR大于标准值并且L小于R
+		{
+			j--;//右边向左一位
+		}
+		while (a[i] <= temp && i < j)
+		{
+			i++;//左边向右一位
+		}
+		if (i < j)//交换
+		{
+			t = a[i];
+			a[i] = a[j];
+			a[j] = t;
+		}
+	}
+	a[left] = a[i];
+	a[i] = temp;
+	quicksort(left, i - 1);
+	quicksort(i + 1, right);
+	return;
+}
+
+int main()
+{
+	int i, j;
+	scanf_s("%d", &n);
+	for (i = 1; i <= n; i++)
+	{
+		scanf_s("%d", &a[i]);
+	}
+	quicksort(1, n);
+	for (i = 1; i <= n; i++)
+	{
+		printf("%d", a[i]);
+	}
+	system("pause");
+		return 0;
+}
